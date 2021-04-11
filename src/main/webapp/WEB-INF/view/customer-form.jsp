@@ -21,6 +21,8 @@
 	<div id="container">
 		<h3>Save Customer</h3>
 		<form:form action="saveCustomer" modelAttribute="customer" method="POST">
+		<!-- Need to associate customer data with certain customer id -->
+		<form:hidden path="id"/>
 		<table>
 			<tbody>
 			<tr> 
