@@ -52,7 +52,7 @@ href="${pageContext.request.contextPath}/resources/css/style.css"/>
 		
 		<!-- Construct a delete link for each customer -->
 		<c:url var="deleteLink" value ="/customer/delete">
-			<c:param name= "customerId" value = "${tempCustomer.id}" />
+			<c:param name= "customerid" value = "${tempCustomer.id}" />
 		</c:url>
 		
 		<tr>
