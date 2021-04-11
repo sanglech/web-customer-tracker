@@ -40,14 +40,22 @@ href="${pageContext.request.contextPath}/resources/css/style.css"/>
 			<th>First Name</th>
 			<th>Last Name</th>
 			<th>email</th>
+			<th>Action</th>
 		</tr>
 		
 		<!--  Loop over and print each customer -->
 		<c:forEach var="tempCustomer" items="${customers}">
+		<!-- Construct an update link for each customer -->
+		<c:url var="updateLink" value ="/customer/showFormForUpdate">
+			<c:param name= "customerId" value = "${tempCustomer.id}" />
+		</c:url>
+		
+		
 		<tr>
 			<td>${tempCustomer.firstName}</td>
 			<td>${tempCustomer.lastName}</td>
 			<td>${tempCustomer.email}</td>
+			<td><a href="${updateLink}">Update</a></td>
 		</tr>
 		</c:forEach>
 		
