@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.christian.springdemo.entity.Customer;
+import com.christian.springdemo.utils.SortUtils;
 
 @Repository
 public class CustomerDAOImpl implements CustomerDAO {
@@ -17,7 +18,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 	//need to inject the session factory
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+	/*
 	@Override
 	public List<Customer> getCustomers() {
 		
@@ -34,7 +35,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 		//return result list
 		return customers;
 	}
-
+*/
 	@Override
 	public void saveCustomer(Customer theCustomer) {
 		//get current hibernate session
@@ -96,6 +97,42 @@ public class CustomerDAOImpl implements CustomerDAO {
                 
         // return the results        
         return customers;
+	}
+
+	@Override
+	public List<Customer> getCustomers(int theSortField) {
+		
+		// get the current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+				
+		// determine sort field
+		String theFieldName = null;
+		
+		switch (theSortField) {
+			case SortUtils.FIRST_NAME: 
+				theFieldName = "firstName";
+				break;
+			case SortUtils.LAST_NAME:
+				theFieldName = "lastName";
+				break;
+			case SortUtils.EMAIL:
+				theFieldName = "email";
+				break;
+			default:
+				// if nothing matches the default to sort by lastName
+				theFieldName = "lastName";
+		}
+		
+		// create a query  
+		String queryString = "from Customer order by " + theFieldName;
+		Query<Customer> theQuery = 
+				currentSession.createQuery(queryString, Customer.class);
+		
+		// execute query and get result list
+		List<Customer> customers = theQuery.getResultList();
+				
+		// return the results		
+		return customers;
 	}
 
 
