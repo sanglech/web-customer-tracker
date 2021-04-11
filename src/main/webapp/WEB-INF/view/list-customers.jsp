@@ -21,6 +21,19 @@ href="${pageContext.request.contextPath}/resources/css/style.css"/>
 	
 	<div id="container">
 		<div id="content">
+		
+		<!-- put new button to add customer, 
+		will call spring controller mapping to showFormForAdd -->
+		
+		<input type="button" value ="Add Customer"
+		  onclick="window.location.href='showFormForAdd'; return false;"
+		  class="add-button"
+		/>
+		<div>
+		
+		
+		</div>
+		
 		<!-- Add out html here -->
 		<table>
 		<tr>
